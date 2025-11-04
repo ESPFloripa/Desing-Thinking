@@ -8,13 +8,13 @@
     <!-- Carrega o Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Carrega a fonte Inter do Google Fonts -->
+    <!-- Carrega a fonte Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Configuração customizada do Tailwind -->
     <script>
+        // Configuração customizada do Tailwind
         tailwind.config = {
             theme: {
                 extend: {
@@ -23,24 +23,48 @@
                     },
                     colors: {
                         'esp-blue': {
-                            '600': '#005a9c', // Um azul institucional
+                            '600': '#005a9c', 
                             '700': '#004a80',
                             '100': '#e6f0f7',
                             '50': '#f3f8fb'
                         }
-                    }
+                    },
+                    // Adiciona o plugin de tipografia (prose)
+                    typography: (theme) => ({
+                        DEFAULT: {
+                            css: {
+                                h3: {
+                                    fontWeight: '600',
+                                    color: theme('colors.gray.700'),
+                                },
+                                'ol > li::marker': {
+                                     color: theme('colors.gray.800'), // Alterado para 800 (mais escuro)
+                                },
+                                'ul > li::marker': {
+                                     color: theme('colors.gray.800'), // Alterado para 800 (mais escuro)
+                                },
+                            },
+                        },
+                    }),
                 }
-            }
+            },
         }
     </script>
+    <!-- Script para carregar o plugin de tipografia -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+
+
     <style>
-        /* Estilos para o cabeçalho com imagem de fundo e overlay */
+        /* Estilos para o cabeçalho com imagem de fundo */
         .header-with-bg {
             background-image: url('https://imgur.com/e0S58JZ.png');
             background-size: cover;
             background-position: center;
             position: relative;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Sombra no texto para legibilidade */
         }
+
         .header-with-bg::before {
             content: "";
             position: absolute;
@@ -48,16 +72,16 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.55); /* Overlay 55% */
+            background-color: rgba(0, 0, 0, 0.55); /* Overlay 55% escuro */
             z-index: 1;
         }
+
         .header-with-bg > div {
             position: relative;
-            z-index: 2;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.5); /* Sombra no texto para legibilidade */
+            z-index: 2; 
         }
-        
-        /* Estilo para a tela de senha (overlay) */
+
+        /* Estilos para a tela de senha (overlay) */
         #password-overlay {
             position: fixed;
             top: 0;
@@ -68,55 +92,53 @@
             background-size: cover;
             background-position: center;
             z-index: 100;
-            /* As 3 propriedades abaixo foram movidas para classes Tailwind para corrigir o bug */
-            /* display: flex; */
-            /* align-items: center; */
-            /* justify-content: center; */
-            padding: 1rem; /* Espaçamento para telas pequenas */
+            padding: 1rem;
         }
     </style>
 </head>
 <body class="font-inter bg-gray-100 text-gray-800">
 
     <!-- TELA DE SENHA (OVERLAY) -->
-    <!-- Classes 'flex items-center justify-center' adicionadas aqui -->
+    <!-- Classes 'flex items-center justify-center' corrigem o bug de não sumir -->
     <div id="password-overlay" class="transition-opacity duration-500 flex items-center justify-center">
         <!-- Caixa de Login -->
         <div id="login-box" class="bg-white/25 backdrop-blur-sm rounded-xl shadow-2xl p-8 md:p-12 max-w-lg w-full text-center">
             
-            <h2 class="text-xl font-light text-gray-700">Especialização em Liderança e Gestão em Saúde</h2>
-            <h1 class="text-4xl font-bold text-gray-900 my-2">Design Thinking</h1>
-            <h3 class="text-lg font-light text-gray-700 mb-4">Escola de Saúde Pública de Florianópolis</h3>
+            <h2 class="text-2xl font-semibold text-gray-900">Especialização em Liderança e Gestão em Saúde</h2>
+            <h1 class="text-4xl font-bold text-gray-900 my-4">Design Thinking</h1>
+            <p class="text-lg text-gray-800 font-medium">Escola de Saúde Pública de Florianópolis</p>
+            
+            <p class="text-sm text-gray-700 mt-6">Conteúdo restrito aos alunos regularly matriculados no curso</p>
+            <p class="text-md text-gray-800 font-medium mt-4">Por favor, insira a senha para acessar esta aula</p>
 
-            <p class="text-sm text-gray-600 mb-4">Conteúdo restrito aos alunos regularmente matriculados no curso.</p>
-            <p class="text-gray-700 font-medium mb-4">Por favor, insira a senha para acessar esta aula:</p>
-
-            <form id="password-form">
-                <input type="password" id="password-input" class="w-full px-4 py-3 rounded-lg border border-gray-300 text-center text-lg focus:outline-none focus:ring-2 focus:ring-esp-blue-600" placeholder="••••••••">
+            <div class="mt-6">
+                <input id="password-input" type="password" placeholder="Digite a senha" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-esp-blue-600 focus:border-transparent text-center">
                 
-                <p id="error-message" class="text-red-600 font-semibold mt-3 hidden">Senha incorreta. Tente novamente.</p>
-
-                <button type="submit" class="w-full bg-esp-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-esp-blue-700 focus:outline-none focus:ring-2 focus:ring-esp-blue-600 focus:ring-opacity-50 transition-colors duration-200 mt-6 text-lg">
+                <button id="password-submit" class="w-full bg-esp-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-esp-blue-700 focus:outline-none focus:ring-2 focus:ring-esp-blue-600 focus:ring-opacity-50 transition-colors duration-200 mt-4">
                     Acessar
                 </button>
-            </form>
+                
+                <p id="password-error" class="text-red-600 font-semibold mt-3 h-4"></p>
+            </div>
         </div>
     </div>
 
     <!-- CONTEÚDO PRINCIPAL DO SITE (Escondido por padrão) -->
     <div id="main-content" class="hidden">
         
+        <!-- Cabeçalho do Site -->
         <header class="header-with-bg p-8 shadow-md text-center">
-            <div>
-                <h2 class="text-xl font-light opacity-90 text-white">Escola de Saúde Pública de Florianópolis</h2>
-                <h1 class="text-4xl font-bold mt-1 text-white">Design Thinking</h1>
-                <p class="text-lg font-light opacity-90 mt-2 text-white">Especialização em Liderança e Gestão em Saúde</p>
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-xl font-light opacity-90">Escola de Saúde Pública de Florianópolis</h2>
+                <h1 class="text-4xl font-bold mt-1">Design Thinking</h1>
+                <p class="text-lg font-light opacity-90 mt-2">Especialização em Liderança e Gestão em Saúde</p>
             </div>
         </header>
 
+        <!-- Container Principal das Atividades -->
         <main class="max-w-5xl mx-auto p-4 md:p-8 space-y-8">
 
-            <!-- ATIVIDADE 1: VÍDEOS -->
+            <!-- Atividade 1: Vídeos -->
             <section id="atividade-1" class="bg-white rounded-xl shadow-lg overflow-hidden">
                 <div class="p-6 md:p-8">
                     <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-6">
@@ -127,10 +149,11 @@
                     </div>
                     <p class="text-gray-600 mb-6">Assista aos vídeos:</p>
 
+                    <!-- Grid de Vídeos -->
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
                             <h3 class="text-lg font-semibold mb-2">1. O processo de Design Thinking</h3>
-                            <div class="aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg overflow-hidden shadow-inner">
+                            <div class="aspect-video bg-gray-200 rounded-lg overflow-hidden">
                                 <iframe 
                                     class="w-full h-full"
                                     src="https://www.youtube.com/embed/8tUuMJhAAU8" 
@@ -143,7 +166,7 @@
                         </div>
                         <div>
                             <h3 class="text-lg font-semibold mb-2">2. Design Thinking em ação</h3>
-                            <div class="aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg overflow-hidden shadow-inner">
+                            <div class="aspect-video bg-gray-200 rounded-lg overflow-hidden">
                                 <iframe 
                                     class="w-full h-full"
                                     src="https://www.youtube.com/embed/WZUYFL1jgrI" 
@@ -158,7 +181,7 @@
                 </div>
             </section>
 
-            <!-- ATIVIDADE 2: LEITURA -->
+            <!-- Atividade 2: Leitura -->
             <section id="atividade-2" class="bg-white rounded-xl shadow-lg overflow-hidden">
                 <div class="p-6 md:p-8">
                     <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-6">
@@ -169,6 +192,7 @@
                     </div>
                     <p class="text-gray-600 mb-6">Leia o artigo "Introdução ao Design Thinking".</p>
                     
+                    <!-- Botão de Acesso -->
                     <a href="https://drive.google.com/file/d/1bUGbJqKo4cA6VE2fIRfiWCiM-BQsgCey/view?usp=drive_link" 
                        target="_blank" 
                        rel="noopener noreferrer"
@@ -178,7 +202,7 @@
                 </div>
             </section>
 
-            <!-- ATIVIDADE 3: COLETA DE DADOS -->
+            <!-- Atividade 3: Coleta de Dados -->
             <section id="atividade-3" class="bg-white rounded-xl shadow-lg overflow-hidden">
                 <div class="p-6 md:p-8">
                     <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-6">
@@ -188,41 +212,41 @@
                         </span>
                     </div>
                     
-                    <!-- Tailwind 'prose' para formatar o texto como um documento -->
-                    <div class="prose prose-lg max-w-none prose-h3:font-semibold prose-h3:text-gray-700 prose-ul:list-disc prose-ul:pl-6 prose-li:my-1 prose-ol:list-decimal prose-ol:pl-6 prose-ol:space-y-1">
-                        <h3 class="mb-4"><strong>Instruções para Preparação da Oficina de Design Thinking</strong></h3>
+                    <!-- Bloco de Texto Introdutório (Prose) -->
+                    <div class="prose max-w-none">
+                        <h3 class="font-bold mb-4">Instruções para Preparação da Oficina de Design Thinking</h3>
                         <p class="mb-4">Você deve explorar o processo atual de agendamento de consultas em Unidades Básicas de Saúde de seu município para entender os desafios, identificar pontos de melhoria e coletar informações reais que servirão como base para as atividades da oficina de Design Thinking.</p>
                         <p>Escolha uma das duas abordagens para coleta de informações listadas abaixo:</p>
                     </div>
 
                     <!-- Sistema de Abas -->
                     <div class="mt-6">
-                        
+                        <!-- Navegação das Abas -->
                         <div class="border-b border-gray-200">
                             <nav class="-mb-px flex space-x-6" aria-label="Tabs">
                                 <button id="tab-a-btn" 
                                         class="tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-lg text-esp-blue-600 border-esp-blue-600">
-                                    <strong>A. Experimentar o Processo em Primeira Pessoa</strong>
+                                    <b>A. Experimentar o Processo em Primeira Pessoa</b>
                                 </button>
                                 <button id="tab-b-btn" 
                                         class="tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-lg text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300">
-                                    <strong>B. Entrevistar Pessoas</strong>
+                                    <b>B. Entrevistar Pessoas</b>
                                 </button>
                             </nav>
                         </div>
 
                         <!-- Conteúdo das Abas -->
-                        <div class="py-6 prose prose-lg max-w-none prose-h3:font-semibold prose-h3:text-gray-700 prose-ul:list-disc prose-ul:pl-6 prose-li:my-1 prose-ol:list-decimal prose-ol:ml-6 prose-ol:space-y-1 prose-strong:font-semibold">
+                        <div class="py-6 prose max-w-none">
                             
                             <!-- Conteúdo A -->
                             <div id="tab-a-content">
-                                <h3><strong>A. Experimentar o Processo em Primeira Pessoa</strong></h3>
-                                <ul>
+                                <h3><b>A. Experimentar o Processo em Primeira Pessoa</b></h3>
+                                <ul class="list-disc pl-6 space-y-4"> 
                                     <li>Visitar uma Unidade Básica de Saúde próxima para realizar o agendamento de uma consulta com Médico de Família (simulado ou real).</li>
                                     <li>Observar todas as etapas do processo, desde a chegada até a conclusão do agendamento.</li>
                                     <li>
                                         Detalhes que você deve estar atento:
-                                        <ol>
+                                        <ol class="list-decimal pl-6 space-y-1 mt-2">
                                             <li>Tempo de espera;</li>
                                             <li>Atendimento dos profissionais quanto à efetividade, cordialidade e conhecimento;</li>
                                             <li>Facilidade ou dificuldade em entender o processo;</li>
@@ -238,12 +262,12 @@
                             
                             <!-- Conteúdo B -->
                             <div id="tab-b-content" class="hidden">
-                                <h3><strong>B. Entrevistar Pessoas que Passaram pelo Processo</strong></h3>
-                                 <ul>
+                                <h3><b>B. Entrevistar Pessoas que Passaram pelo Processo</b></h3>
+                                 <ul class="list-disc pl-6 space-y-4"> 
                                     <li>Identificar e convidar pessoas que passaram pelo processo de agendamento de uma consulta com Médico de Família em uma UBS recentemente. Caso não conheça ninguém você pode visitar uma UBS e conversar com algum usuário, idealmente 3 ou mais.</li>
                                     <li>
                                         Elaborar perguntas abertas para guiar a conversa. Exemplos:
-                                        <ol>
+                                        <ol class="list-decimal pl-6 space-y-1 mt-2">
                                             <li>Como foi sua experiência ao agendar uma consulta na UBS?</li>
                                             <li>Quais dificuldades você encontrou?</li>
                                             <li>O que funcionou bem no processo?</li>
@@ -255,14 +279,14 @@
                                     </li>
                                     <li>Registrar as respostas obtidas, destacando padrões, reclamações recorrentes e sugestões de melhoria. Caso vá a uma UBS, durante a entrevista não interfira junto aos usuários ou equipe (...), o intuito aqui é só coletar dados e percepções (...).</li>
                                     <li>Não escolher pessoas que tenham o processo de agendamento facilitado por algum fator individual (pacientes crônicos (...), gestantes, etc...), idealmente eleger para entrevista pessoas que tem de passar pelo processo padrão de agendamento.</li>
-                                </ul>
+                                 </ul>
                             </div>
                         </div>
                     </div>
 
                     <!-- Caixas de Destaque -->
                     <div class="space-y-6 mt-6">
-                        
+                        <!-- Observação Importante -->
                         <div class="bg-yellow-50 border-l-4 border-yellow-400 p-5 rounded-r-lg">
                             <h4 class="text-lg font-semibold text-yellow-800 mb-2">Observação Importante</h4>
                             <ul class="list-disc list-inside text-yellow-700 space-y-1">
@@ -271,11 +295,13 @@
                             </ul>
                         </div>
 
+                        <!-- Dica Final -->
                         <div class="bg-green-50 border-l-4 border-green-500 p-5 rounded-r-lg">
                             <h4 class="text-lg font-semibold text-green-800 mb-2">Dica Final</h4>
                             <p class="text-green-700">Explore o processo com curiosidade e empatia. O sucesso do seu grupo na oficina dependerá da qualidade dos insights coletados nessa fase preparatória.</p>
                         </div>
 
+                        <!-- Para a Oficina -->
                         <div class="bg-esp-blue-50 border-l-4 border-esp-blue-600 p-5 rounded-r-lg">
                             <h4 class="text-lg font-semibold text-esp-blue-700 mb-2">Para a Oficina, estar preparado para:</h4>
                             <ul class="list-disc list-inside text-esp-blue-700 space-y-1">
@@ -291,58 +317,74 @@
 
         </main>
 
+        <!-- Rodapé -->
         <footer class="text-center p-8 bg-gray-800 text-gray-400 mt-12">
-            <p class="text-sm">© 2025 - Escola de Saúde Pública de Florianópolis</p>
-            <p class="text-sm mt-1">Todos os direitos reservados. Não copie sem autorização.</p>
+            <p class="text-sm">© 2025 - Escola de Saúde Pública de Florianópolis.</p>
+            <p class="text-sm">Todos os direitos reservados. Não copie sem autorização.</p>
         </footer>
     </div>
 
-    <script>
-        // Executa o script apenas quando o DOM (a página) estiver completamente carregado
-        document.addEventListener('DOMContentLoaded', () => {
 
+    <!-- SCRIPT CORRIGIDO -->
+    <script>
+        // Espera o DOM estar completamente carregado para executar o script
+        document.addEventListener('DOMContentLoaded', function () {
+            
             // --- LÓGICA DA SENHA ---
-            const passwordForm = document.getElementById('password-form');
-            const passwordInput = document.getElementById('password-input');
-            const errorMessage = document.getElementById('error-message');
             const passwordOverlay = document.getElementById('password-overlay');
             const mainContent = document.getElementById('main-content');
+            const passwordInput = document.getElementById('password-input');
+            const passwordSubmit = document.getElementById('password-submit');
+            const passwordError = document.getElementById('password-error');
+            const correctPassword = 'esp2025';
 
-            // Verifica se os elementos da senha existem antes de adicionar o listener
-            if (passwordForm && passwordInput && errorMessage && passwordOverlay && mainContent) {
-                
-                passwordForm.addEventListener('submit', (e) => {
-                    e.preventDefault(); // Impede o envio real do formulário
-                    const password = passwordInput.value;
-
-                    if (password === 'esp2025') {
-                        // Senha correta: esconde o overlay e mostra o conteúdo
+            function checkPassword() {
+                if (passwordInput.value === correctPassword) {
+                    // Senha correta
+                    passwordError.textContent = '';
+                    // Adiciona classe para efeito de fade-out
+                    passwordOverlay.classList.add('opacity-0');
+                    
+                    // Remove o overlay do DOM e mostra o conteúdo principal
+                    setTimeout(() => {
                         passwordOverlay.classList.add('hidden');
                         mainContent.classList.remove('hidden');
-                    } else {
-                        // Senha incorreta: mostra erro e borda vermelha
-                        errorMessage.classList.remove('hidden');
-                        passwordInput.classList.add('border-red-500');
-                    }
-                });
-            } else {
-                console.error("Erro: Elementos da tela de senha não encontrados.");
+                    }, 500); // Tempo do fade-out
+
+                } else {
+                    // Senha incorreta
+                    passwordError.textContent = 'Senha incorreta. Tente novamente.';
+                    // Limpa o campo
+                    passwordInput.value = '';
+                }
             }
 
-            // --- LÓGICA DAS ABAS (TABS) ---
+            // Adiciona listener ao botão
+            if(passwordSubmit) {
+                passwordSubmit.addEventListener('click', checkPassword);
+            }
+
+            // Adiciona listener para a tecla "Enter" no campo de senha
+            if(passwordInput) {
+                passwordInput.addEventListener('keyup', function(event) {
+                    if (event.key === 'Enter') {
+                        checkPassword();
+                    }
+                });
+            }
+
+            // --- LÓGICA DAS ABAS (ATIVIDADE 3) ---
             const tabAButton = document.getElementById('tab-a-btn');
             const tabBButton = document.getElementById('tab-b-btn');
             const tabAContent = document.getElementById('tab-a-content');
             const tabBContent = document.getElementById('tab-b-content');
 
-            // Classes de estilo das abas
+            // Classes de estilo para as abas
             const activeClasses = ['text-esp-blue-600', 'border-esp-blue-600'];
             const inactiveClasses = ['text-gray-500', 'border-transparent', 'hover:text-gray-700', 'hover:border-gray-300'];
 
-            // Verifica se os elementos das abas existem
-            if (tabAButton && tabBButton && tabAContent && tabBContent) {
-
-                tabAButton.addEventListener('click', () => {
+            function switchTab(tabId) {
+                if (tabId === 'a') {
                     // Ativa Botão A
                     tabAButton.classList.remove(...inactiveClasses);
                     tabAButton.classList.add(...activeClasses);
@@ -354,9 +396,8 @@
                     // Mostra Conteúdo A e Esconde Conteúdo B
                     tabAContent.classList.remove('hidden');
                     tabBContent.classList.add('hidden');
-                });
 
-                tabBButton.addEventListener('click', () => {
+                } else if (tabId === 'b') {
                     // Desativa Botão A
                     tabAButton.classList.remove(...activeClasses);
                     tabAButton.classList.add(...inactiveClasses);
@@ -368,12 +409,15 @@
                     // Esconde Conteúdo A e Mostra Conteúdo B
                     tabAContent.classList.add('hidden');
                     tabBContent.classList.remove('hidden');
-                });
+                }
+            }
 
-            } else {
-                // Isso só vai aparecer se o usuário já estiver logado e houver um erro,
-                // o que é improvável, mas é uma boa prática.
-                console.error("Erro: Elementos das abas não encontrados.");
+            // Adiciona listeners aos botões das abas
+            if (tabAButton) {
+                tabAButton.addEventListener('click', () => switchTab('a'));
+            }
+            if (tabBButton) {
+                tabBButton.addEventListener('click', () => switchTab('b'));
             }
 
         });
@@ -381,5 +425,4 @@
 
 </body>
 </html>
-
 
