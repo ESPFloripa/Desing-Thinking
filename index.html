@@ -38,10 +38,10 @@
                                     color: theme('colors.gray.700'),
                                 },
                                 'ol > li::marker': {
-                                     color: theme('colors.gray.800'), // Alterado para 800 (mais escuro)
+                                     color: theme('colors.gray.800'), // Cor dos marcadores numerados
                                 },
                                 'ul > li::marker': {
-                                     color: theme('colors.gray.800'), // Alterado para 800 (mais escuro)
+                                     color: theme('colors.gray.800'), // Cor dos bullet points
                                 },
                             },
                         },
@@ -93,13 +93,16 @@
             background-position: center;
             z-index: 100;
             padding: 1rem;
+            /* Flexbox para centralizar - CORREÇÃO DO BUG */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
 <body class="font-inter bg-gray-100 text-gray-800">
 
     <!-- TELA DE SENHA (OVERLAY) -->
-    <!-- Classes 'flex items-center justify-center' corrigem o bug de não sumir -->
     <div id="password-overlay" class="transition-opacity duration-500 flex items-center justify-center">
         <!-- Caixa de Login -->
         <div id="login-box" class="bg-white/25 backdrop-blur-sm rounded-xl shadow-2xl p-8 md:p-12 max-w-lg w-full text-center">
@@ -192,11 +195,11 @@
                     </div>
                     <p class="text-gray-600 mb-6">Leia o artigo "Introdução ao Design Thinking".</p>
                     
-                    <!-- Botão de Acesso -->
+                    <!-- Botão de Acesso (COR VERDE) -->
                     <a href="https://drive.google.com/file/d/1bUGbJqKo4cA6VE2fIRfiWCiM-BQsgCey/view?usp=drive_link" 
                        target="_blank" 
                        rel="noopener noreferrer"
-                       class="inline-block bg-esp-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-esp-blue-700 focus:outline-none focus:ring-2 focus:ring-esp-blue-600 focus:ring-opacity-50 transition-colors duration-200">
+                       class="inline-block bg-green-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-opacity-50 transition-colors duration-200">
                         Acessar Artigo
                     </a>
                 </div>
@@ -347,8 +350,8 @@
                     
                     // Remove o overlay do DOM e mostra o conteúdo principal
                     setTimeout(() => {
-                        passwordOverlay.classList.add('hidden');
-                        mainContent.classList.remove('hidden');
+                        passwordOverlay.classList.add('hidden'); // Esconde com display:none
+                        mainContent.classList.remove('hidden'); // Mostra o conteúdo
                     }, 500); // Tempo do fade-out
 
                 } else {
