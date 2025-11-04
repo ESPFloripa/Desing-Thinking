@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EAD: Design Thinking - ESP-Florianópolis</title>
-    <!-- Carrega o Tailwind CSS para estilos modernos e responsivos -->
+    
+    <!-- Carrega o Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Carrega a fonte Inter -->
+    
+    <!-- Carrega a fonte Inter do Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Configuração customizada do Tailwind -->
     <script>
-        // Configuração customizada do Tailwind para adicionar a fonte Inter
         tailwind.config = {
             theme: {
                 extend: {
@@ -31,254 +33,353 @@
             }
         }
     </script>
+    <style>
+        /* Estilos para o cabeçalho com imagem de fundo e overlay */
+        .header-with-bg {
+            background-image: url('https://imgur.com/e0S58JZ.png');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .header-with-bg::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.55); /* Overlay 55% */
+            z-index: 1;
+        }
+        .header-with-bg > div {
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.5); /* Sombra no texto para legibilidade */
+        }
+        
+        /* Estilo para a tela de senha (overlay) */
+        #password-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://imgur.com/e0S58JZ.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 100;
+            /* As 3 propriedades abaixo foram movidas para classes Tailwind para corrigir o bug */
+            /* display: flex; */
+            /* align-items: center; */
+            /* justify-content: center; */
+            padding: 1rem; /* Espaçamento para telas pequenas */
+        }
+    </style>
 </head>
 <body class="font-inter bg-gray-100 text-gray-800">
 
-    <!-- Cabeçalho -->
-    <header class="bg-esp-blue-600 text-white p-8 shadow-md">
-        <div class="max-w-5xl mx-auto">
-            <h2 class="text-xl font-light opacity-90">Escola de Saúde Pública de Florianópolis</h2>
-            <h1 class="text-4xl font-bold mt-1">Design Thinking</h1>
-            <p class="text-lg font-light opacity-90 mt-2">Especialização em Liderança e Gestão em Saúde</p>
+    <!-- TELA DE SENHA (OVERLAY) -->
+    <!-- Classes 'flex items-center justify-center' adicionadas aqui -->
+    <div id="password-overlay" class="transition-opacity duration-500 flex items-center justify-center">
+        <!-- Caixa de Login -->
+        <div id="login-box" class="bg-white/25 backdrop-blur-sm rounded-xl shadow-2xl p-8 md:p-12 max-w-lg w-full text-center">
+            
+            <h2 class="text-xl font-light text-gray-700">Especialização em Liderança e Gestão em Saúde</h2>
+            <h1 class="text-4xl font-bold text-gray-900 my-2">Design Thinking</h1>
+            <h3 class="text-lg font-light text-gray-700 mb-4">Escola de Saúde Pública de Florianópolis</h3>
+
+            <p class="text-sm text-gray-600 mb-4">Conteúdo restrito aos alunos regularmente matriculados no curso.</p>
+            <p class="text-gray-700 font-medium mb-4">Por favor, insira a senha para acessar esta aula:</p>
+
+            <form id="password-form">
+                <input type="password" id="password-input" class="w-full px-4 py-3 rounded-lg border border-gray-300 text-center text-lg focus:outline-none focus:ring-2 focus:ring-esp-blue-600" placeholder="••••••••">
+                
+                <p id="error-message" class="text-red-600 font-semibold mt-3 hidden">Senha incorreta. Tente novamente.</p>
+
+                <button type="submit" class="w-full bg-esp-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-esp-blue-700 focus:outline-none focus:ring-2 focus:ring-esp-blue-600 focus:ring-opacity-50 transition-colors duration-200 mt-6 text-lg">
+                    Acessar
+                </button>
+            </form>
         </div>
-    </header>
+    </div>
 
-    <!-- Conteúdo Principal -->
-    <main class="max-w-5xl mx-auto p-4 md:p-8 space-y-8">
-
-        <!-- ATIVIDADE 1: VÍDEOS -->
-        <section id="atividade-1" class="bg-white rounded-xl shadow-lg overflow-hidden">
-            <div class="p-6 md:p-8">
-                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-6">
-                    <h2 class="text-2xl font-semibold text-esp-blue-700">1ª Atividade - Vídeos: O que é Design Thinking?</h2>
-                    <span class="flex-shrink-0 bg-blue-100 text-blue-800 text-sm font-medium rounded-full px-4 py-1.5">
-                        Duração: 20 minutos
-                    </span>
-                </div>
-                <p class="text-gray-600 mb-6">Assista aos vídeos:</p>
-
-                <!-- Grid de Vídeos -->
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <h3 class="text-lg font-semibold mb-2">1. O processo de Design Thinking</h3>
-                        <div class="aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg overflow-hidden">
-                            <!-- 
-                              NOTA: Substitua 'URL_DO_VIDEO_1' pelo link de incorporação (embed) do seu vídeo.
-                              Ex: https://www.youtube.com/embed/CODIGO_DO_VIDEO
-                            -->
-                            <iframe 
-                                class="w-full h-full"
-                                src="https://www.youtube.com/embed/WZUYFL1jgrI" 
-                                title="O processo de Design Thinking" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold mb-2">2. Design Thinking em ação</h3>
-                        <div class="aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg overflow-hidden">
-                            <!-- 
-                              NOTA: Substitua 'URL_DO_VIDEO_2' pelo link de incorporação (embed) do seu vídeo.
-                            -->
-                            <iframe 
-                                class="w-full h-full"
-                                src="https://placehold.co/1600x900/005a9c/ffffff?text=V%C3%ADdeo+2+Aqui" 
-                                title="Design Thinking em ação" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                    </div>
-                </div>
+    <!-- CONTEÚDO PRINCIPAL DO SITE (Escondido por padrão) -->
+    <div id="main-content" class="hidden">
+        
+        <header class="header-with-bg p-8 shadow-md text-center">
+            <div>
+                <h2 class="text-xl font-light opacity-90 text-white">Escola de Saúde Pública de Florianópolis</h2>
+                <h1 class="text-4xl font-bold mt-1 text-white">Design Thinking</h1>
+                <p class="text-lg font-light opacity-90 mt-2 text-white">Especialização em Liderança e Gestão em Saúde</p>
             </div>
-        </section>
+        </header>
 
-        <!-- ATIVIDADE 2: LEITURA -->
-        <section id="atividade-2" class="bg-white rounded-xl shadow-lg overflow-hidden">
-            <div class="p-6 md:p-8">
-                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-6">
-                    <h2 class="text-2xl font-semibold text-esp-blue-700">2ª Atividade - Leitura: Introdução sobre Design Thinking</h2>
-                    <span class="flex-shrink-0 bg-blue-100 text-blue-800 text-sm font-medium rounded-full px-4 py-1.5">
-                        Duração: 20 minutos
-                    </span>
-                </div>
-                <p class="text-gray-600 mb-6">Leia o artigo "Introdução ao Design Thinking".</p>
-                
-                <!-- Botão para o documento -->
-                <a href="#" 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   class="inline-block bg-esp-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-esp-blue-700 focus:outline-none focus:ring-2 focus:ring-esp-blue-600 focus:ring-opacity-50 transition-colors duration-200">
-                    Acessar Artigo
-                </a>
-            </div>
-        </section>
+        <main class="max-w-5xl mx-auto p-4 md:p-8 space-y-8">
 
-        <!-- ATIVIDADE 3: COLETA DE DADOS -->
-        <section id="atividade-3" class="bg-white rounded-xl shadow-lg overflow-hidden">
-            <div class="p-6 md:p-8">
-                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-6">
-                    <h2 class="text-2xl font-semibold text-esp-blue-700">3ª Atividade - Coleta de dados: Preparação para oficina</h2>
-                    <span class="flex-shrink-0 bg-orange-100 text-orange-800 text-sm font-medium rounded-full px-4 py-1.5">
-                        Duração: 200 minutos
-                    </span>
-                </div>
-                
-                <div class="prose prose-lg max-w-none prose-h3:font-semibold prose-h3:text-gray-700 prose-ul:list-disc prose-ul:pl-6 prose-li:my-1">
-                    <h3>Instruções para Preparação da Oficina de Design Thinking</h3>
-                    <p>Você deve explorar o processo atual de agendamento de consultas em Unidades Básicas de Saúde de seu município para entender os desafios, identificar pontos de melhoria e coletar informações reais que servirão como base para as atividades da oficina de Design Thinking.</p>
-                    <p>Você pode escolher uma das duas abordagens para coleta de informações listadas abaixo:</p>
-                </div>
+            <!-- ATIVIDADE 1: VÍDEOS -->
+            <section id="atividade-1" class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="p-6 md:p-8">
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-6">
+                        <h2 class="text-2xl font-semibold text-esp-blue-700">1ª Atividade - Vídeos: O que é Design Thinking?</h2>
+                        <span class="flex-shrink-0 bg-blue-100 text-blue-800 text-sm font-medium rounded-full px-4 py-1.5">
+                            Duração: 20 minutos
+                        </span>
+                    </div>
+                    <p class="text-gray-600 mb-6">Assista aos vídeos:</p>
 
-                <!-- Sistema de Abas Interativo -->
-                <div class="mt-6">
-                    <!-- Botões das Abas -->
-                    <div class="border-b border-gray-200">
-                        <nav class="-mb-px flex space-x-6" aria-label="Tabs">
-                            <button id="tab-a-btn" 
-                                    onclick="switchTab('a')"
-                                    class="tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-lg text-esp-blue-600 border-esp-blue-600">
-                                A. Experimentar em 1ª Pessoa
-                            </button>
-                            <button id="tab-b-btn" 
-                                    onclick="switchTab('b')"
-                                    class="tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-lg text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300">
-                                B. Entrevistar Pessoas
-                            </button>
-                        </nav>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">1. O processo de Design Thinking</h3>
+                            <div class="aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg overflow-hidden shadow-inner">
+                                <iframe 
+                                    class="w-full h-full"
+                                    src="https://www.youtube.com/embed/8tUuMJhAAU8" 
+                                    title="O processo de Design Thinking" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">2. Design Thinking em ação</h3>
+                            <div class="aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg overflow-hidden shadow-inner">
+                                <iframe 
+                                    class="w-full h-full"
+                                    src="https://www.youtube.com/embed/WZUYFL1jgrI" 
+                                    title="Design Thinking em ação" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ATIVIDADE 2: LEITURA -->
+            <section id="atividade-2" class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="p-6 md:p-8">
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-6">
+                        <h2 class="text-2xl font-semibold text-esp-blue-700">2ª Atividade - Leitura: Introdução sobre Design Thinking</h2>
+                        <span class="flex-shrink-0 bg-blue-100 text-blue-800 text-sm font-medium rounded-full px-4 py-1.5">
+                            Duração: 20 minutos
+                        </span>
+                    </div>
+                    <p class="text-gray-600 mb-6">Leia o artigo "Introdução ao Design Thinking".</p>
+                    
+                    <a href="https://drive.google.com/file/d/1bUGbJqKo4cA6VE2fIRfiWCiM-BQsgCey/view?usp=drive_link" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="inline-block bg-esp-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-esp-blue-700 focus:outline-none focus:ring-2 focus:ring-esp-blue-600 focus:ring-opacity-50 transition-colors duration-200">
+                        Acessar Artigo
+                    </a>
+                </div>
+            </section>
+
+            <!-- ATIVIDADE 3: COLETA DE DADOS -->
+            <section id="atividade-3" class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="p-6 md:p-8">
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-6">
+                        <h2 class="text-2xl font-semibold text-esp-blue-700">3ª Atividade - Coleta de dados: Preparação para oficina</h2>
+                        <span class="flex-shrink-0 bg-orange-100 text-orange-800 text-sm font-medium rounded-full px-4 py-1.5">
+                            Duração: 200 minutos
+                        </span>
+                    </div>
+                    
+                    <!-- Tailwind 'prose' para formatar o texto como um documento -->
+                    <div class="prose prose-lg max-w-none prose-h3:font-semibold prose-h3:text-gray-700 prose-ul:list-disc prose-ul:pl-6 prose-li:my-1 prose-ol:list-decimal prose-ol:pl-6 prose-ol:space-y-1">
+                        <h3 class="mb-4"><strong>Instruções para Preparação da Oficina de Design Thinking</strong></h3>
+                        <p class="mb-4">Você deve explorar o processo atual de agendamento de consultas em Unidades Básicas de Saúde de seu município para entender os desafios, identificar pontos de melhoria e coletar informações reais que servirão como base para as atividades da oficina de Design Thinking.</p>
+                        <p>Escolha uma das duas abordagens para coleta de informações listadas abaixo:</p>
                     </div>
 
-                    <!-- Conteúdo das Abas -->
-                    <div class="py-6 prose prose-lg max-w-none prose-h3:font-semibold prose-h3:text-gray-700 prose-ul:list-disc prose-ul:pl-6 prose-li:my-1 prose-strong:font-semibold">
-                        <!-- Conteúdo Aba A -->
-                        <div id="tab-a-content">
-                            <h3>A. Experimentar o Processo em Primeira Pessoa</h3>
-                            <ul>
-                                <li>Visitar uma Unidade Básica de Saúde próxima para realizar o agendamento de uma consulta com Médico de Família (simulado ou real).</li>
-                                <li>Observar todas as etapas do processo, desde a chegada até a conclusão do agendamento.</li>
-                                <li>
-                                    Detalhes que você deve estar atento:
-                                    <ul class="list-['o'] list-inside ml-6 space-y-1 mt-2">
-                                        <li>Tempo de espera;</li>
-                                        <li>Atendimento dos profissionais quanto à efetividade, cordialidade e conhecimento;</li>
-                                        <li>Facilidade ou dificuldade em entender o processo;</li>
-                                        <li>Barreiras tecnológicas ou burocráticas encontradas;</li>
-                                        <li>Seu sentimento em cada etapa do processo;</li>
-                                        <li>Sua avaliação geral quanto ao processo.</li>
-                                    </ul>
-                                </li>
-                                <li>Refletir sobre as emoções e sensações durante o processo (ansiedade, frustração, satisfação, etc.).</li>
-                                <li>Registrar todo o processo com detalhes para que possa posteriormente relatar na oficina.</li>
-                            </ul>
-                        </div>
+                    <!-- Sistema de Abas -->
+                    <div class="mt-6">
                         
-                        <!-- Conteúdo Aba B -->
-                        <div id="tab-b-content" class="hidden">
-                            <h3>B. Entrevistar Pessoas que Passaram pelo Processo</h3>
-                             <ul>
-                                <li>Identificar e convidar pessoas que passaram pelo processo de agendamento de uma consulta com Médico de Família em uma UBS recentemente. Caso não conheça ninguém você pode visitar uma UBS e conversar com algum usuário, idealmente 3 ou mais.</li>
-                                <li>
-                                    Elaborar perguntas abertas para guiar a conversa. Exemplos:
-                                    <ul class="list-['o'] list-inside ml-6 space-y-1 mt-2">
-                                        <li>Como foi sua experiência ao agendar uma consulta na UBS?</li>
-                                        <li>Quais dificuldades você encontrou?</li>
-                                        <li>O que funcionou bem no processo?</li>
-                                        <li>O que você mudaria para tornar o processo mais fácil?</li>
-                                        <li>Qual o seu sentimento em cada etapa do processo?</li>
-                                        <li>Qual a sua avaliação final quanto ao processo?</li>
-                                        <li>Você tem alguma sugestão para melhorar o processo?</li>
-                                    </ul>
-                                </li>
-                                <li><strong>Registro:</strong> Registrar as respostas obtidas, destacando padrões, reclamações recorrentes e sugestões de melhoria. Caso vá a uma UBS, durante a entrevista não interfira junto aos usuários ou equipe (...), o intuito aqui é só coletar dados e percepções (...).</li>
-                                <li><strong>Critério de Seleção:</strong> Não escolher pessoas que tenham o processo de agendamento facilitado por algum fator individual (pacientes crônicos (...), gestantes, etc...), idealmente eleger para entrevista pessoas que tem de passar pelo processo padrão de agendamento.</li>
+                        <div class="border-b border-gray-200">
+                            <nav class="-mb-px flex space-x-6" aria-label="Tabs">
+                                <button id="tab-a-btn" 
+                                        class="tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-lg text-esp-blue-600 border-esp-blue-600">
+                                    <strong>A. Experimentar o Processo em Primeira Pessoa</strong>
+                                </button>
+                                <button id="tab-b-btn" 
+                                        class="tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-lg text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300">
+                                    <strong>B. Entrevistar Pessoas</strong>
+                                </button>
+                            </nav>
+                        </div>
+
+                        <!-- Conteúdo das Abas -->
+                        <div class="py-6 prose prose-lg max-w-none prose-h3:font-semibold prose-h3:text-gray-700 prose-ul:list-disc prose-ul:pl-6 prose-li:my-1 prose-ol:list-decimal prose-ol:ml-6 prose-ol:space-y-1 prose-strong:font-semibold">
+                            
+                            <!-- Conteúdo A -->
+                            <div id="tab-a-content">
+                                <h3><strong>A. Experimentar o Processo em Primeira Pessoa</strong></h3>
+                                <ul>
+                                    <li>Visitar uma Unidade Básica de Saúde próxima para realizar o agendamento de uma consulta com Médico de Família (simulado ou real).</li>
+                                    <li>Observar todas as etapas do processo, desde a chegada até a conclusão do agendamento.</li>
+                                    <li>
+                                        Detalhes que você deve estar atento:
+                                        <ol>
+                                            <li>Tempo de espera;</li>
+                                            <li>Atendimento dos profissionais quanto à efetividade, cordialidade e conhecimento;</li>
+                                            <li>Facilidade ou dificuldade em entender o processo;</li>
+                                            <li>Barreiras tecnológicas ou burocráticas encontradas;</li>
+                                            <li>Seu sentimento em cada etapa do processo;</li>
+                                            <li>Sua avaliação geral quanto ao processo.</li>
+                                        </ol>
+                                    </li>
+                                    <li>Refletir sobre as emoções e sensações durante o processo (ansiedade, frustração, satisfação, etc.).</li>
+                                    <li>Registrar todo o processo com detalhes para que possa posteriormente relatar na oficina.</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Conteúdo B -->
+                            <div id="tab-b-content" class="hidden">
+                                <h3><strong>B. Entrevistar Pessoas que Passaram pelo Processo</strong></h3>
+                                 <ul>
+                                    <li>Identificar e convidar pessoas que passaram pelo processo de agendamento de uma consulta com Médico de Família em uma UBS recentemente. Caso não conheça ninguém você pode visitar uma UBS e conversar com algum usuário, idealmente 3 ou mais.</li>
+                                    <li>
+                                        Elaborar perguntas abertas para guiar a conversa. Exemplos:
+                                        <ol>
+                                            <li>Como foi sua experiência ao agendar uma consulta na UBS?</li>
+                                            <li>Quais dificuldades você encontrou?</li>
+                                            <li>O que funcionou bem no processo?</li>
+                                            <li>O que você mudaria para tornar o processo mais fácil?</li>
+                                            <li>Qual o seu sentimento em cada etapa do processo?</li>
+                                            <li>Qual a sua avaliação final quanto ao processo?</li>
+                                            <li>Você tem alguma sugestão para melhorar o processo?</li>
+                                        </ol>
+                                    </li>
+                                    <li>Registrar as respostas obtidas, destacando padrões, reclamações recorrentes e sugestões de melhoria. Caso vá a uma UBS, durante a entrevista não interfira junto aos usuários ou equipe (...), o intuito aqui é só coletar dados e percepções (...).</li>
+                                    <li>Não escolher pessoas que tenham o processo de agendamento facilitado por algum fator individual (pacientes crônicos (...), gestantes, etc...), idealmente eleger para entrevista pessoas que tem de passar pelo processo padrão de agendamento.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Caixas de Destaque -->
+                    <div class="space-y-6 mt-6">
+                        
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-5 rounded-r-lg">
+                            <h4 class="text-lg font-semibold text-yellow-800 mb-2">Observação Importante</h4>
+                            <ul class="list-disc list-inside text-yellow-700 space-y-1">
+                                <li>Mantenha o respeito e a ética durante as interações.</li>
+                                <li>Você pode gravar o processo de agendamento ou as entrevistas, mas caso utilize gravações, solicite permissão dos participantes.</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-green-50 border-l-4 border-green-500 p-5 rounded-r-lg">
+                            <h4 class="text-lg font-semibold text-green-800 mb-2">Dica Final</h4>
+                            <p class="text-green-700">Explore o processo com curiosidade e empatia. O sucesso do seu grupo na oficina dependerá da qualidade dos insights coletados nessa fase preparatória.</p>
+                        </div>
+
+                        <div class="bg-esp-blue-50 border-l-4 border-esp-blue-600 p-5 rounded-r-lg">
+                            <h4 class="text-lg font-semibold text-esp-blue-700 mb-2">Para a Oficina, estar preparado para:</h4>
+                            <ul class="list-disc list-inside text-esp-blue-700 space-y-1">
+                                <li>Reportar as informações detalhadas sobre o procedimento de agendamento.</li>
+                                <li>Repassar as percepções e sentimentos durante o processo.</li>
+                                <li>Relatar os principais desafios e oportunidades de melhoria identificados.</li>
+                                <li>Compartilhar os aprendizados com o grupo no início da oficina.</li>
                             </ul>
                         </div>
                     </div>
                 </div>
+            </section>
 
-                <!-- Seção de Destaques (Observações, Dicas) -->
-                <div class="space-y-6 mt-6">
-                    <!-- Observação Importante -->
-                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-5 rounded-r-lg">
-                        <h4 class="text-lg font-semibold text-yellow-800 mb-2">Observação Importante</h4>
-                        <ul class="list-disc list-inside text-yellow-700 space-y-1">
-                            <li>Mantenha o respeito e a ética durante as interações.</li>
-                            <li>Você pode gravar o processo de agendamento ou as entrevistas, mas caso utilize gravações, solicite permissão dos participantes.</li>
-                        </ul>
-                    </div>
+        </main>
 
-                    <!-- Dica Final -->
-                    <div class="bg-green-50 border-l-4 border-green-500 p-5 rounded-r-lg">
-                        <h4 class="text-lg font-semibold text-green-800 mb-2">Dica Final</h4>
-                        <p class="text-green-700">Explore o processo com curiosidade e empatia. O sucesso do seu grupo na oficina dependerá da qualidade dos insights coletados nessa fase preparatória.</p>
-                    </div>
+        <footer class="text-center p-8 bg-gray-800 text-gray-400 mt-12">
+            <p class="text-sm">© 2025 - Escola de Saúde Pública de Florianópolis</p>
+            <p class="text-sm mt-1">Todos os direitos reservados. Não copie sem autorização.</p>
+        </footer>
+    </div>
 
-                    <!-- Preparação para Oficina -->
-                    <div class="bg-esp-blue-50 border-l-4 border-esp-blue-600 p-5 rounded-r-lg">
-                        <h4 class="text-lg font-semibold text-esp-blue-700 mb-2">Para a Oficina, estar preparado para:</h4>
-                        <ul class="list-disc list-inside text-esp-blue-700 space-y-1">
-                            <li>Reportar as informações detalhadas sobre o procedimento de agendamento.</li>
-                            <li>Repassar as percepções e sentimentos durante o processo.</li>
-                            <li>Relatar os principais desafios e oportunidades de melhoria identificados.</li>
-                            <li>Compartilhar os aprendizados com o grupo no início da oficina.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Rodapé -->
-    <footer class="text-center p-8 bg-gray-800 text-gray-400 mt-12">
-        <p><strong>ESP-Floripa</strong></p>
-        <p class="text-sm">Todos os direitos reservados. Não copie sem autorização.</p>
-    </footer>
-
-    <!-- Script para Interatividade das Abas -->
     <script>
-        // Seleciona os botões e conteúdos
-        const tabAButton = document.getElementById('tab-a-btn');
-        const tabBButton = document.getElementById('tab-b-btn');
-        const tabAContent = document.getElementById('tab-a-content');
-        const tabBContent = document.getElementById('tab-b-content');
+        // Executa o script apenas quando o DOM (a página) estiver completamente carregado
+        document.addEventListener('DOMContentLoaded', () => {
 
-        // Classes de estilo
-        const activeClasses = ['text-esp-blue-600', 'border-esp-blue-600'];
-        const inactiveClasses = ['text-gray-500', 'border-transparent', 'hover:text-gray-700', 'hover:border-gray-300'];
+            // --- LÓGICA DA SENHA ---
+            const passwordForm = document.getElementById('password-form');
+            const passwordInput = document.getElementById('password-input');
+            const errorMessage = document.getElementById('error-message');
+            const passwordOverlay = document.getElementById('password-overlay');
+            const mainContent = document.getElementById('main-content');
 
-        function switchTab(tabId) {
-            if (tabId === 'a') {
-                // Ativa Botão A
-                tabAButton.classList.remove(...inactiveClasses);
-                tabAButton.classList.add(...activeClasses);
+            // Verifica se os elementos da senha existem antes de adicionar o listener
+            if (passwordForm && passwordInput && errorMessage && passwordOverlay && mainContent) {
                 
-                // Desativa Botão B
-                tabBButton.classList.remove(...activeClasses);
-                tabBButton.classList.add(...inactiveClasses);
+                passwordForm.addEventListener('submit', (e) => {
+                    e.preventDefault(); // Impede o envio real do formulário
+                    const password = passwordInput.value;
 
-                // Mostra Conteúdo A e Esconde Conteúdo B
-                tabAContent.classList.remove('hidden');
-                tabBContent.classList.add('hidden');
-            } else if (tabId === 'b') {
-                // Desativa Botão A
-                tabAButton.classList.remove(...activeClasses);
-                tabAButton.classList.add(...inactiveClasses);
-                
-                // Ativa Botão B
-                tabBButton.classList.remove(...inactiveClasses);
-                tabBButton.classList.add(...activeClasses);
-
-                // Esconde Conteúdo A e Mostra Conteúdo B
-                tabAContent.classList.add('hidden');
-                tabBContent.classList.remove('hidden');
+                    if (password === 'esp2025') {
+                        // Senha correta: esconde o overlay e mostra o conteúdo
+                        passwordOverlay.classList.add('hidden');
+                        mainContent.classList.remove('hidden');
+                    } else {
+                        // Senha incorreta: mostra erro e borda vermelha
+                        errorMessage.classList.remove('hidden');
+                        passwordInput.classList.add('border-red-500');
+                    }
+                });
+            } else {
+                console.error("Erro: Elementos da tela de senha não encontrados.");
             }
-        }
+
+            // --- LÓGICA DAS ABAS (TABS) ---
+            const tabAButton = document.getElementById('tab-a-btn');
+            const tabBButton = document.getElementById('tab-b-btn');
+            const tabAContent = document.getElementById('tab-a-content');
+            const tabBContent = document.getElementById('tab-b-content');
+
+            // Classes de estilo das abas
+            const activeClasses = ['text-esp-blue-600', 'border-esp-blue-600'];
+            const inactiveClasses = ['text-gray-500', 'border-transparent', 'hover:text-gray-700', 'hover:border-gray-300'];
+
+            // Verifica se os elementos das abas existem
+            if (tabAButton && tabBButton && tabAContent && tabBContent) {
+
+                tabAButton.addEventListener('click', () => {
+                    // Ativa Botão A
+                    tabAButton.classList.remove(...inactiveClasses);
+                    tabAButton.classList.add(...activeClasses);
+                    
+                    // Desativa Botão B
+                    tabBButton.classList.remove(...activeClasses);
+                    tabBButton.classList.add(...inactiveClasses);
+
+                    // Mostra Conteúdo A e Esconde Conteúdo B
+                    tabAContent.classList.remove('hidden');
+                    tabBContent.classList.add('hidden');
+                });
+
+                tabBButton.addEventListener('click', () => {
+                    // Desativa Botão A
+                    tabAButton.classList.remove(...activeClasses);
+                    tabAButton.classList.add(...inactiveClasses);
+                    
+                    // Ativa Botão B
+                    tabBButton.classList.remove(...inactiveClasses);
+                    tabBButton.classList.add(...activeClasses);
+
+                    // Esconde Conteúdo A e Mostra Conteúdo B
+                    tabAContent.classList.add('hidden');
+                    tabBContent.classList.remove('hidden');
+                });
+
+            } else {
+                // Isso só vai aparecer se o usuário já estiver logado e houver um erro,
+                // o que é improvável, mas é uma boa prática.
+                console.error("Erro: Elementos das abas não encontrados.");
+            }
+
+        });
     </script>
 
 </body>
 </html>
+
 
