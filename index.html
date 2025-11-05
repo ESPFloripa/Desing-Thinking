@@ -54,6 +54,10 @@
             align-items: center;
             justify-content: center;
         }
+
+        /* --- ESTILOS DO ACCORDION / DETAILS REMOVIDOS --- */
+        /* Não são mais necessários */
+
     </style>
 </head>
 <body class="font-inter bg-gray-100 text-gray-800">
@@ -71,15 +75,13 @@
             <p class="text-md text-gray-800 font-medium mt-4">Por favor, insira a senha para acessar esta aula</p>
 
             <div class="mt-6">
-                <!-- Script de senha com onkeyup -->
+                <!-- onkeyup removido, será adicionado pelo script robusto -->
                 <input id="password-input" type="password" placeholder="Digite a senha" 
-                       class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-esp-blue-600 focus:border-transparent text-center"
-                       onkeyup="handlePasswordKey(event)">
+                       class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-esp-blue-600 focus:border-transparent text-center">
                 
-                <!-- Script de senha com onclick -->
+                <!-- onclick removido, será adicionado pelo script robusto -->
                 <button id="password-submit" 
-                        class="w-full bg-esp-blue-600 text-black font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-esp-blue-700 focus:outline-none focus:ring-2 focus:ring-esp-blue-600 focus:ring-opacity-50 transition-colors duration-200 mt-4"
-                        onclick="checkPassword()">
+                        class="w-full bg-esp-blue-600 text-black font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-esp-blue-700 focus:outline-none focus:ring-2 focus:ring-esp-blue-600 focus:ring-opacity-50 transition-colors duration-200 mt-4">
                     Acessar
                 </button>
                 
@@ -167,7 +169,7 @@
                 </div>
             </section>
 
-            <!-- Atividade 3: Coleta de Dados (SEM ABAS, CONTEÚDO DIRETO) -->
+            <!-- Atividade 3: Coleta de Dados (COM SISTEMA DE ABAS ONCLICK) -->
             <section id="atividade-3" class="bg-white rounded-xl shadow-lg overflow-hidden">
                 <div class="p-6 md:p-8">
                     <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-6">
@@ -184,54 +186,71 @@
                         <p>Escolha uma das duas abordagens para coleta de informações listadas abaixo:</p>
                     </div>
 
-                    <!-- Conteúdo A e B exibidos diretamente, sem abas -->
-                    <div class="mt-6 space-y-8">
-                        
-                        <!-- Conteúdo A -->
-                        <div id="conteudo-A" class="prose max-w-none">
-                            <h3 class="font-bold text-lg"><b>A. Experimentar o Processo em Primeira Pessoa</b></h3>
-                            <ul class="list-disc pl-6 space-y-4 mt-4"> 
-                                <li>Visitar uma Unidade Básica de Saúde próxima para realizar o agendamento de uma consulta com Médico de Família (simulado ou real).</li>
-                                <li>Observar todas as etapas do processo, desde a chegada até a conclusão do agendamento.</li>
-                                <li>
-                                    Detalhes que você deve estar atento:
-                                    <ol class="list-decimal pl-6 space-y-1 mt-2">
-                                        <li>Tempo de espera;</li>
-                                        <li>Atendimento dos profissionais quanto à efetividade, cordialidade e conhecimento;</li>
-                                        <li>Facilidade ou dificuldade em entender o processo;</li>
-                                        <li>Barreiras tecnológicas ou burocráticas encontradas;</li>
-                                        <li>Seu sentimento em cada etapa do processo;</li>
-                                        <li>Sua avaliação geral quanto ao processo.</li>
-                                    </ol>
-                                </li>
-                                <li>Refletir sobre as emoções e sensações durante o processo (ansiedade, frustração, satisfação, etc.).</li>
-                                <li>Registrar todo o processo com detalhes para que possa posteriormente relatar na oficina.</li>
-                            </ul>
+                    <!-- NOVA ESTRUTURA: Abas (Tabs) com onclick -->
+                    <div class="mt-6">
+                        <!-- Botões das Abas -->
+                        <div class="flex space-x-4 border-b border-gray-300">
+                            <!-- Botão A (Ativo por padrão) -->
+                            <!-- onclick removido, será adicionado pelo script robusto -->
+                            <button id="botao-A"
+                                    class="px-6 py-3 font-semibold text-lg border-b-4 bg-esp-blue-600 text-white border-esp-blue-600">
+                                <b>A. Experimentar o Processo</b>
+                            </button>
+                            <!-- Botão B (Inativo por padrão) -->
+                            <!-- onclick removido, será adicionado pelo script robusto -->
+                            <button id="botao-B"
+                                    class="px-6 py-3 font-semibold text-lg border-b-4 bg-white text-gray-500 border-transparent hover:bg-gray-100 hover:border-gray-300">
+                                <b>B. Entrevistar Pessoas</b>
+                            </button>
                         </div>
 
-                        <!-- Conteúdo B -->
-                        <div id="conteudo-B" class="prose max-w-none">
-                            <h3 class="font-bold text-lg"><b>B. Entrevistar Pessoas que Passaram pelo Processo</b></h3>
-                            <ul class="list-disc pl-6 space-y-4 mt-4"> 
-                                <li>Identificar e convidar pessoas que passaram pelo processo de agendamento de uma consulta com Médico de Família em uma UBS recentemente. Caso não conheça ninguém você pode visitar uma UBS e conversar com algum usuário, idealmente 3 ou mais.</li>
-                                <li>
-                                    Elaborar perguntas abertas para guiar a conversa. Exemplos:
-                                    <ol class="list-decimal pl-6 space-y-1 mt-2">
-                                        <li>Como foi sua experiência ao agendar uma consulta na UBS?</li>
-                                        <li>Quais dificuldades você encontrou?</li>
-                                        <li>O que funcionou bem no processo?</li>
-                                        <li>O que você mudaria para tornar o processo mais fácil?</li>
-                                        <li>Qual o seu sentimento em cada etapa do processo?</li>
-                                        <li>Qual a sua avaliação final quanto ao processo?</li>
-                                        <li>Você tem alguma sugestão para melhorar o processo?</li>
-                                    </ol>
-                                </li>
-                                <li>Registrar as respostas obtidas, destacando padrões, reclamações recorrentes e sugestões de melhoria. Caso vá a uma UBS, durante a entrevista não interfira junto aos usuários ou equipe (...), o intuito aqui é só coletar dados e percepções (...).</li>
-                                <li>Não escolher pessoas que tenham o processo de agendamento facilitado por algum fator individual (pacientes crônicos (...), gestantes, etc...), idealmente eleger para entrevista pessoas que tem de passar pelo processo padrão de agendamento.</li>
-                             </ul>
+                        <!-- Conteúdo das Abas -->
+                        <div class="py-6">
+                            
+                            <!-- Conteúdo A (Visível por padrão) -->
+                            <div id="conteudo-A" class="prose max-w-none">
+                                <ul class="list-disc pl-6 space-y-4"> 
+                                    <li>Visitar uma Unidade Básica de Saúde próxima para realizar o agendamento de uma consulta com Médico de Família (simulado ou real).</li>
+                                    <li>Observar todas as etapas do processo, desde a chegada até a conclusão do agendamento.</li>
+                                    <li>
+                                        Detalhes que você deve estar atento:
+                                        <ol class="list-decimal pl-6 space-y-1 mt-2">
+                                            <li>Tempo de espera;</li>
+                                            <li>Atendimento dos profissionais quanto à efetividade, cordialidade e conhecimento;</li>
+                                            <li>Facilidade ou dificuldade em entender o processo;</li>
+                                            <li>Barreiras tecnológicas ou burocráticas encontradas;</li>
+                                            <li>Seu sentimento em cada etapa do processo;</li>
+                                            <li>Seu avaliação geral quanto ao processo.</li>
+                                        </ol>
+                                    </li>
+                                    <li>Refletir sobre as emoções e sensações durante o processo (ansiedade, frustração, satisfação, etc.).</li>
+                                    <li>Registrar todo o processo com detalhes para que possa posteriormente relatar na oficina.</li>
+                                </ul>
+                            </div>
+
+                            <!-- Conteúdo B (Escondido por padrão) -->
+                            <div id="conteudo-B" class="prose max-w-none hidden">
+                                <ul class="list-disc pl-6 space-y-4"> 
+                                    <li>Identificar e convidar pessoas que passaram pelo processo de agendamento de uma consulta com Médico de Família em uma UBS recentemente. Caso não conheça ninguém você pode visitar uma UBS e conversar com algum usuário, idealmente 3 ou mais.</li>
+                                    <li>
+                                        Elaborar perguntas abertas para guiar a conversa. Exemplos:
+                                        <ol class="list-decimal pl-6 space-y-1 mt-2">
+                                            <li>Como foi sua experiência ao agendar uma consulta na UBS?</li>
+                                            <li>Quais dificuldades você encontrou?</li>
+                                            <li>O que funcionou bem no processo?</li>
+                                            <li>O que você mudaria para tornar o processo mais fácil?</li>
+                                            <li>Qual o seu sentimento em cada etapa do processo?</li>
+                                            <li>Qual a sua avaliação final quanto ao processo?</li>
+                                            <li>Você tem alguma sugestão para melhorar o processo?</li>
+                                        </ol>
+                                    </li>
+                                    <li>Registrar as respostas obtidas, destacando padrões, reclamações recorrentes e sugestões de melhoria. Caso vá a uma UBS, durante a entrevista não interfira junto aos usuários ou equipe (...), o intuito aqui é só coletar dados e percepções (...).</li>
+                                    <li>Não escolher pessoas que tenham o processo de agendamento facilitado por algum fator individual (pacientes crônicos (...), gestantes, etc...), idealmente eleger para entrevista pessoas que tem de passar pelo processo padrão de agendamento.</li>
+                                 </ul>
+                            </div>
                         </div>
                     </div>
-                    <!-- Fim do Conteúdo A e B -->
+                    <!-- Fim do Sistema de Abas -->
 
 
                     <!-- Caixas de Destaque (Mantidas abaixo) -->
@@ -323,47 +342,126 @@
     </script>
 
     <!-- 3. SCRIPT PRINCIPAL DA PÁGINA -->
-    <!-- Funções globais chamadas por onclick/onkeyup -->
+    <!-- Funções globais REMOVIDAS -->
+    
+    <!-- SCRIPT NOVO E ROBUSTO (Baseado no seu) -->
     <script>
-        // --- LÓGICA DA SENHA (Funções Globais) ---
+    // IIFE (Immediately Invoked Function Expression) para encapsular o código
+    (function(){
+        const PW = 'esp2025';
         
-        const correctPassword = 'esp2025';
-
-        function checkPassword() {
-            // "Encontra" os elementos no momento do clique
-            const passwordOverlay = document.getElementById('password-overlay');
-            const mainContent = document.getElementById('main-content');
-            const passwordInput = document.getElementById('password-input');
-            const passwordError = document.getElementById('password-error');
-
-            if (passwordInput.value === correctPassword) {
-                // Senha correta
-                passwordError.textContent = '';
-                passwordOverlay.classList.add('opacity-0');
-                
+        // Função para desbloquear a página
+        function hardUnlock() {
+            var overlay = document.getElementById('password-overlay');
+            var content = document.getElementById('main-content');
+            var err = document.getElementById('password-error');
+            
+            if (err) err.textContent = ''; // Limpa o erro
+            
+            if (overlay) { 
+                overlay.classList.add('opacity-0');
                 setTimeout(() => {
-                    passwordOverlay.classList.add('hidden'); 
-                    mainContent.classList.remove('hidden'); 
-                }, 500); 
-
-            } else {
-                // Senha incorreta
-                passwordError.textContent = 'Senha incorreta. Tente novamente.';
-                passwordInput.value = '';
+                    overlay.classList.add('hidden'); 
+                    overlay.style.display = 'none'; 
+                    overlay.setAttribute('aria-hidden', 'true'); 
+                }, 500); // 500ms da transição de opacidade
+            }
+            if (content) { 
+                content.classList.remove('hidden'); 
+                content.style.display = 'block'; 
+                content.setAttribute('aria-hidden', 'false'); 
             }
         }
+        
+        // Expor a função (para testes, se necessário)
+        window.__forceUnlock = hardUnlock;
 
-        function handlePasswordKey(event) {
-            // Verifica se a tecla pressionada foi "Enter"
-            if (event.key === 'Enter') {
-                checkPassword();
+        // Espera o DOM carregar para adicionar os "escutadores"
+        document.addEventListener('DOMContentLoaded', function(){
+            
+            // --- LÓGICA DA SENHA (ROBUSTA) ---
+            var btn = document.getElementById('password-submit');
+            var input = document.getElementById('password-input');
+            
+            if (btn) {
+                btn.onclick = function(ev){
+                    try { ev.preventDefault(); } catch(e) {}
+                    var val = (input && input.value || '').trim();
+                    if (val === PW) {
+                        hardUnlock();
+                    } else {
+                        var err = document.getElementById('password-error');
+                        if (err) err.textContent = 'Senha incorreta. Tente novamente.';
+                        if (input) { input.focus(); input.select && input.select(); }
+                    }
+                    return false;
+                };
             }
-        }
+            
+            if (input) {
+                input.addEventListener('keydown', function(e){
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        var val = (input.value || '').trim();
+                        if (val === PW) {
+                            hardUnlock();
+                        } else {
+                           // Simula o clique no botão para mostrar o erro
+                           if(btn) btn.click();
+                        }
+                    }
+                });
+            }
 
-        // --- LÓGICA DAS ABAS REMOVIDA ---
-        // Não é mais necessária, pois o conteúdo é exibido diretamente.
+            // --- LÓGICA DAS ABAS (ROBUSTA) ---
+            const botaoA = document.getElementById('botao-A');
+            const botaoB = document.getElementById('botao-B');
+            const conteudoA = document.getElementById('conteudo-A');
+            const conteudoB = document.getElementById('conteudo-B');
 
+            // Classes para os botões (apenas as de estado)
+            const activeClasses = ['bg-esp-blue-600', 'text-white', 'border-esp-blue-600'];
+            const inactiveClasses = ['bg-white', 'text-gray-500', 'border-transparent'];
+
+            // Função para definir o estado (helper)
+            function setBtnState(btn, isActive) {
+                if (btn) {
+                    // Adiciona/remove classes ativas
+                    btn.classList.toggle(activeClasses[0], isActive);
+                    btn.classList.toggle(activeClasses[1], isActive);
+                    btn.classList.toggle(activeClasses[2], isActive);
+                    
+                    // Adiciona/remove classes inativas
+                    btn.classList.toggle(inactiveClasses[0], !isActive);
+                    btn.classList.toggle(inactiveClasses[1], !isActive);
+                    btn.classList.toggle(inactiveClasses[2], !isActive);
+                }
+            }
+
+            // Função principal para trocar as abas
+            function switchTab(tabId) {
+                const isAActive = (tabId === 'A');
+                
+                if (conteudoA) conteudoA.classList.toggle('hidden', !isAActive);
+                if (conteudoB) conteudoB.classList.toggle('hidden', isAActive);
+
+                setBtnState(botaoA, isAActive);
+                setBtnState(botaoB, !isAActive);
+            }
+
+            // Adiciona os listeners de clique aos botões
+            if (botaoA) {
+                botaoA.onclick = function() { switchTab('A'); };
+            }
+            if (botaoB) {
+                botaoB.onclick = function() { switchTab('B'); };
+            }
+            
+            // Garante o estado inicial (Aba A ativa),
+            // embora o HTML já o defina por defeito.
+            switchTab('A'); 
+        });
+    })();
     </script>
-
 </body>
 </html>
