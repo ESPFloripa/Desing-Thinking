@@ -5,55 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EAD: Design Thinking - ESP-Florianópolis</title>
     
-    <!-- Carrega o Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Carrega a fonte Inter -->
+    <!-- Fontes e Estilos -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <script>
-        // Configuração customizada do Tailwind
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'inter': ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        'esp-blue': {
-                            '600': '#005a9c', 
-                            '700': '#004a80',
-                            '100': '#e6f0f7',
-                            '50': '#f3f8fb'
-                        }
-                    },
-                    // Adiciona o plugin de tipografia (prose)
-                    typography: (theme) => ({
-                        DEFAULT: {
-                            css: {
-                                h3: {
-                                    fontWeight: '600',
-                                    color: theme('colors.gray.700'),
-                                },
-                                'ol > li::marker': {
-                                     color: theme('colors.gray.800'), // Cor dos marcadores numerados
-                                },
-                                'ul > li::marker': {
-                                     color: theme('colors.gray.800'), // Cor dos bullet points
-                                },
-                            },
-                        },
-                    }),
-                }
-            },
-        }
-    </script>
-    <!-- Script para carregar o plugin de tipografia -->
-    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-
-
     <style>
         /* Estilos para o cabeçalho com imagem de fundo */
         .header-with-bg {
@@ -93,7 +49,7 @@
             background-position: center;
             z-index: 100;
             padding: 1rem;
-            /* Flexbox para centralizar - CORREÇÃO DO BUG */
+            /* Flexbox para centralizar */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -115,9 +71,15 @@
             <p class="text-md text-gray-800 font-medium mt-4">Por favor, insira a senha para acessar esta aula</p>
 
             <div class="mt-6">
-                <input id="password-input" type="password" placeholder="Digite a senha" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-esp-blue-600 focus:border-transparent text-center">
+                <!-- Script de senha com onkeyup -->
+                <input id="password-input" type="password" placeholder="Digite a senha" 
+                       class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-esp-blue-600 focus:border-transparent text-center"
+                       onkeyup="handlePasswordKey(event)">
                 
-                <button id="password-submit" class="w-full bg-esp-blue-600 text-black font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-esp-blue-700 focus:outline-none focus:ring-2 focus:ring-esp-blue-600 focus:ring-opacity-50 transition-colors duration-200 mt-4">
+                <!-- Script de senha com onclick -->
+                <button id="password-submit" 
+                        class="w-full bg-esp-blue-600 text-black font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-esp-blue-700 focus:outline-none focus:ring-2 focus:ring-esp-blue-600 focus:ring-opacity-50 transition-colors duration-200 mt-4"
+                        onclick="checkPassword()">
                     Acessar
                 </button>
                 
@@ -205,7 +167,7 @@
                 </div>
             </section>
 
-            <!-- Atividade 3: Coleta de Dados -->
+            <!-- Atividade 3: Coleta de Dados (SEM ABAS, CONTEÚDO DIRETO) -->
             <section id="atividade-3" class="bg-white rounded-xl shadow-lg overflow-hidden">
                 <div class="p-6 md:p-8">
                     <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-6">
@@ -222,73 +184,58 @@
                         <p>Escolha uma das duas abordagens para coleta de informações listadas abaixo:</p>
                     </div>
 
-                    <!-- Sistema de Abas -->
-                    <div class="mt-6">
-                        <!-- Navegação das Abas -->
-                        <div class="border-b border-gray-200">
-                            <nav class="-mb-px flex space-x-6" aria-label="Tabs">
-                                <button id="tab-a-btn" 
-                                        class="tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-lg text-esp-blue-600 border-esp-blue-600">
-                                    <b>A. Experimentar o Processo em Primeira Pessoa</b>
-                                </button>
-                                <button id="tab-b-btn" 
-                                        class="tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-lg text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300">
-                                    <b>B. Entrevistar Pessoas</b>
-                                </button>
-                            </nav>
+                    <!-- Conteúdo A e B exibidos diretamente, sem abas -->
+                    <div class="mt-6 space-y-8">
+                        
+                        <!-- Conteúdo A -->
+                        <div id="conteudo-A" class="prose max-w-none">
+                            <h3 class="font-bold text-lg"><b>A. Experimentar o Processo em Primeira Pessoa</b></h3>
+                            <ul class="list-disc pl-6 space-y-4 mt-4"> 
+                                <li>Visitar uma Unidade Básica de Saúde próxima para realizar o agendamento de uma consulta com Médico de Família (simulado ou real).</li>
+                                <li>Observar todas as etapas do processo, desde a chegada até a conclusão do agendamento.</li>
+                                <li>
+                                    Detalhes que você deve estar atento:
+                                    <ol class="list-decimal pl-6 space-y-1 mt-2">
+                                        <li>Tempo de espera;</li>
+                                        <li>Atendimento dos profissionais quanto à efetividade, cordialidade e conhecimento;</li>
+                                        <li>Facilidade ou dificuldade em entender o processo;</li>
+                                        <li>Barreiras tecnológicas ou burocráticas encontradas;</li>
+                                        <li>Seu sentimento em cada etapa do processo;</li>
+                                        <li>Sua avaliação geral quanto ao processo.</li>
+                                    </ol>
+                                </li>
+                                <li>Refletir sobre as emoções e sensações durante o processo (ansiedade, frustração, satisfação, etc.).</li>
+                                <li>Registrar todo o processo com detalhes para que possa posteriormente relatar na oficina.</li>
+                            </ul>
                         </div>
 
-                        <!-- Conteúdo das Abas -->
-                        <div class="py-6 prose max-w-none">
-                            
-                            <!-- Conteúdo A -->
-                            <div id="tab-a-content">
-                                <h3><b>A. Experimentar o Processo em Primeira Pessoa</b></h3>
-                                <ul class="list-disc pl-6 space-y-4"> 
-                                    <li>Visitar uma Unidade Básica de Saúde próxima para realizar o agendamento de uma consulta com Médico de Família (simulado ou real).</li>
-                                    <li>Observar todas as etapas do processo, desde a chegada até a conclusão do agendamento.</li>
-                                    <li>
-                                        Detalhes que você deve estar atento:
-                                        <ol class="list-decimal pl-6 space-y-1 mt-2">
-                                            <li>Tempo de espera;</li>
-                                            <li>Atendimento dos profissionais quanto à efetividade, cordialidade e conhecimento;</li>
-                                            <li>Facilidade ou dificuldade em entender o processo;</li>
-                                            <li>Barreiras tecnológicas ou burocráticas encontradas;</li>
-                                            <li>Seu sentimento em cada etapa do processo;</li>
-                                            <li>Sua avaliação geral quanto ao processo.</li>
-                                        </ol>
-                                    </li>
-                                    <li>Refletir sobre as emoções e sensações durante o processo (ansiedade, frustração, satisfação, etc.).</li>
-                                    <li>Registrar todo o processo com detalhes para que possa posteriormente relatar na oficina.</li>
-                                </ul>
-                            </div>
-                            
-                            <!-- Conteúdo B -->
-                            <div id="tab-b-content" class="hidden">
-                                <h3><b>B. Entrevistar Pessoas que Passaram pelo Processo</b></h3>
-                                 <ul class="list-disc pl-6 space-y-4"> 
-                                    <li>Identificar e convidar pessoas que passaram pelo processo de agendamento de uma consulta com Médico de Família em uma UBS recentemente. Caso não conheça ninguém você pode visitar uma UBS e conversar com algum usuário, idealmente 3 ou mais.</li>
-                                    <li>
-                                        Elaborar perguntas abertas para guiar a conversa. Exemplos:
-                                        <ol class="list-decimal pl-6 space-y-1 mt-2">
-                                            <li>Como foi sua experiência ao agendar uma consulta na UBS?</li>
-                                            <li>Quais dificuldades você encontrou?</li>
-                                            <li>O que funcionou bem no processo?</li>
-                                            <li>O que você mudaria para tornar o processo mais fácil?</li>
-                                            <li>Qual o seu sentimento em cada etapa do processo?</li>
-                                            <li>Qual a sua avaliação final quanto ao processo?</li>
-                                            <li>Você tem alguma sugestão para melhorar o processo?</li>
-                                        </ol>
-                                    </li>
-                                    <li>Registrar as respostas obtidas, destacando padrões, reclamações recorrentes e sugestões de melhoria. Caso vá a uma UBS, durante a entrevista não interfira junto aos usuários ou equipe (...), o intuito aqui é só coletar dados e percepções (...).</li>
-                                    <li>Não escolher pessoas que tenham o processo de agendamento facilitado por algum fator individual (pacientes crônicos (...), gestantes, etc...), idealmente eleger para entrevista pessoas que tem de passar pelo processo padrão de agendamento.</li>
-                                 </ul>
-                            </div>
+                        <!-- Conteúdo B -->
+                        <div id="conteudo-B" class="prose max-w-none">
+                            <h3 class="font-bold text-lg"><b>B. Entrevistar Pessoas que Passaram pelo Processo</b></h3>
+                            <ul class="list-disc pl-6 space-y-4 mt-4"> 
+                                <li>Identificar e convidar pessoas que passaram pelo processo de agendamento de uma consulta com Médico de Família em uma UBS recentemente. Caso não conheça ninguém você pode visitar uma UBS e conversar com algum usuário, idealmente 3 ou mais.</li>
+                                <li>
+                                    Elaborar perguntas abertas para guiar a conversa. Exemplos:
+                                    <ol class="list-decimal pl-6 space-y-1 mt-2">
+                                        <li>Como foi sua experiência ao agendar uma consulta na UBS?</li>
+                                        <li>Quais dificuldades você encontrou?</li>
+                                        <li>O que funcionou bem no processo?</li>
+                                        <li>O que você mudaria para tornar o processo mais fácil?</li>
+                                        <li>Qual o seu sentimento em cada etapa do processo?</li>
+                                        <li>Qual a sua avaliação final quanto ao processo?</li>
+                                        <li>Você tem alguma sugestão para melhorar o processo?</li>
+                                    </ol>
+                                </li>
+                                <li>Registrar as respostas obtidas, destacando padrões, reclamações recorrentes e sugestões de melhoria. Caso vá a uma UBS, durante a entrevista não interfira junto aos usuários ou equipe (...), o intuito aqui é só coletar dados e percepções (...).</li>
+                                <li>Não escolher pessoas que tenham o processo de agendamento facilitado por algum fator individual (pacientes crônicos (...), gestantes, etc...), idealmente eleger para entrevista pessoas que tem de passar pelo processo padrão de agendamento.</li>
+                             </ul>
                         </div>
                     </div>
+                    <!-- Fim do Conteúdo A e B -->
 
-                    <!-- Caixas de Destaque -->
-                    <div class="space-y-6 mt-6">
+
+                    <!-- Caixas de Destaque (Mantidas abaixo) -->
+                    <div class="space-y-6 mt-10">
                         <!-- Observação Importante -->
                         <div class="bg-yellow-50 border-l-4 border-yellow-400 p-5 rounded-r-lg">
                             <h4 class="text-lg font-semibold text-yellow-800 mb-2">Observação Importante</h4>
@@ -328,104 +275,95 @@
     </div>
 
 
-    <!-- SCRIPT CORRIGIDO -->
+    <!-- 
+      Scripts movidos para o final do <body>
+    -->
+    
+    <!-- 1. Carrega o Tailwind principal E o plugin de tipografia JUNTOS -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    
+    <!-- 2. O script de configuração vem DEPOIS do script principal -->
     <script>
-        // Espera o DOM estar completamente carregado para executar o script
-        document.addEventListener('DOMContentLoaded', function () {
-            
-            // --- LÓGICA DA SENHA ---
+        // Configuração customizada do Tailwind
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'esp-blue': {
+                            '600': '#005a9c', 
+                            '700': '#004a80',
+                            '100': '#e6f0f7',
+                            '50': '#f3f8fb'
+                        }
+                    },
+                    // Configura o plugin de tipografia (prose)
+                    typography: (theme) => ({
+                        DEFAULT: {
+                            css: {
+                                h3: {
+                                    fontWeight: '600',
+                                    color: theme('colors.gray.700'),
+                                },
+                                'ol > li::marker': {
+                                     color: theme('colors.gray.800'), // Cor dos marcadores numerados
+                                },
+                                'ul > li::marker': {
+                                     color: theme('colors.gray.800'), // Cor dos bullet points
+                                },
+                            },
+                        },
+                    }),
+                }
+            },
+            // O plugin (typography) já está incluído no <script src=...> acima
+        }
+    </script>
+
+    <!-- 3. SCRIPT PRINCIPAL DA PÁGINA -->
+    <!-- Funções globais chamadas por onclick/onkeyup -->
+    <script>
+        // --- LÓGICA DA SENHA (Funções Globais) ---
+        
+        const correctPassword = 'esp2025';
+
+        function checkPassword() {
+            // "Encontra" os elementos no momento do clique
             const passwordOverlay = document.getElementById('password-overlay');
             const mainContent = document.getElementById('main-content');
             const passwordInput = document.getElementById('password-input');
-            const passwordSubmit = document.getElementById('password-submit');
             const passwordError = document.getElementById('password-error');
-            const correctPassword = 'esp2025';
 
-            function checkPassword() {
-                if (passwordInput.value === correctPassword) {
-                    // Senha correta
-                    passwordError.textContent = '';
-                    // Adiciona classe para efeito de fade-out
-                    passwordOverlay.classList.add('opacity-0');
-                    
-                    // Remove o overlay do DOM e mostra o conteúdo principal
-                    setTimeout(() => {
-                        passwordOverlay.classList.add('hidden'); // Esconde com display:none
-                        mainContent.classList.remove('hidden'); // Mostra o conteúdo
-                    }, 500); // Tempo do fade-out
+            if (passwordInput.value === correctPassword) {
+                // Senha correta
+                passwordError.textContent = '';
+                passwordOverlay.classList.add('opacity-0');
+                
+                setTimeout(() => {
+                    passwordOverlay.classList.add('hidden'); 
+                    mainContent.classList.remove('hidden'); 
+                }, 500); 
 
-                } else {
-                    // Senha incorreta
-                    passwordError.textContent = 'Senha incorreta. Tente novamente.';
-                    // Limpa o campo
-                    passwordInput.value = '';
-                }
+            } else {
+                // Senha incorreta
+                passwordError.textContent = 'Senha incorreta. Tente novamente.';
+                passwordInput.value = '';
             }
+        }
 
-            // Adiciona listener ao botão
-            if(passwordSubmit) {
-                passwordSubmit.addEventListener('click', checkPassword);
+        function handlePasswordKey(event) {
+            // Verifica se a tecla pressionada foi "Enter"
+            if (event.key === 'Enter') {
+                checkPassword();
             }
+        }
 
-            // Adiciona listener para a tecla "Enter" no campo de senha
-            if(passwordInput) {
-                passwordInput.addEventListener('keyup', function(event) {
-                    if (event.key === 'Enter') {
-                        checkPassword();
-                    }
-                });
-            }
+        // --- LÓGICA DAS ABAS REMOVIDA ---
+        // Não é mais necessária, pois o conteúdo é exibido diretamente.
 
-            // --- LÓGICA DAS ABAS (ATIVIDADE 3) ---
-            const tabAButton = document.getElementById('tab-a-btn');
-            const tabBButton = document.getElementById('tab-b-btn');
-            const tabAContent = document.getElementById('tab-a-content');
-            const tabBContent = document.getElementById('tab-b-content');
-
-            // Classes de estilo para as abas
-            const activeClasses = ['text-esp-blue-600', 'border-esp-blue-600'];
-            const inactiveClasses = ['text-gray-500', 'border-transparent', 'hover:text-gray-700', 'hover:border-gray-300'];
-
-            function switchTab(tabId) {
-                if (tabId === 'a') {
-                    // Ativa Botão A
-                    tabAButton.classList.remove(...inactiveClasses);
-                    tabAButton.classList.add(...activeClasses);
-                    
-                    // Desativa Botão B
-                    tabBButton.classList.remove(...activeClasses);
-                    tabBButton.classList.add(...inactiveClasses);
-
-                    // Mostra Conteúdo A e Esconde Conteúdo B
-                    tabAContent.classList.remove('hidden');
-                    tabBContent.classList.add('hidden');
-
-                } else if (tabId === 'b') {
-                    // Desativa Botão A
-                    tabAButton.classList.remove(...activeClasses);
-                    tabAButton.classList.add(...inactiveClasses);
-                    
-                    // Ativa Botão B
-                    tabBButton.classList.remove(...inactiveClasses);
-                    tabBButton.classList.add(...activeClasses);
-
-                    // Esconde Conteúdo A e Mostra Conteúdo B
-                    tabAContent.classList.add('hidden');
-                    tabBContent.classList.remove('hidden');
-                }
-            }
-
-            // Adiciona listeners aos botões das abas
-            if (tabAButton) {
-                tabAButton.addEventListener('click', () => switchTab('a'));
-            }
-            if (tabBButton) {
-                tabBButton.addEventListener('click', () => switchTab('b'));
-            }
-
-        });
     </script>
 
 </body>
 </html>
-
